@@ -11,9 +11,10 @@ public class PlayerStates : MonoBehaviour {
         Crouching=2,
         Falling=3,
         Stop=4,
-        Dodging=5, 
+        DodgingInAir = 5, 
         Jump=6,
-        Land=7
+        Landing=7,
+        DodgeLanding=8
     }
 
     private static PlayerStates s_instance = null;
@@ -27,12 +28,19 @@ public class PlayerStates : MonoBehaviour {
     
     public static void Set(AnimationParameter parameter)
     {
+      
         s_instance.animatorParameters[(int)parameter].Set();
+        
     }
 
     public static void UnSet(AnimationParameter parameter)
     {
         s_instance.animatorParameters[(int)parameter].UnSet();
+    }
+
+    public static void ResetTrigger(AnimationParameter parameter)
+    {
+        s_instance.animatorParameters[(int)parameter].ResetTrigger();
     }
 
     // Use this for initialization
@@ -94,8 +102,20 @@ public class PlayerStates : MonoBehaviour {
             }
             else if(parameterType == AnimParameterType.Trigger)
             {
-                Debug.LogError("Cannot unset the trigger called>>" + parameterName);
+                Debug.LogError("Cannot unset the trigger named>>" + parameterName);
             } 
+        }
+
+        public void ResetTrigger()
+        {
+            if (parameterType == AnimParameterType.Bool)
+            {
+                Debug.LogError("Cannot untrigger the bool named>>" + parameterName);                
+            }
+            else if (parameterType == AnimParameterType.Trigger)
+            {
+                s_instance._playerAnimator.ResetTrigger(_parameterHash);
+            }
         }
 
     }

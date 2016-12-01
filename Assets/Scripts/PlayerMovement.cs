@@ -48,26 +48,36 @@ public class PlayerMovement : MonoBehaviour {
     /// If set, will damp rigidbody velocity
     /// </summary>
     bool _bDampVelocity;
-	// Update is called once per frame
-	
+    // Update is called once per frame
+    private bool _falling = false;
     void Update()
     {
         Physics2D.gravity = new Vector2(0, -gravityY); //recalculating gravity so that if it's changed during runtime, it's effect can be seen
 
         ProcessKeyPress();
-       /** if(_playerFacingDirection == Direction.Left)
+        if(_playerFacingDirection == Direction.Left)
         {
-            _spriteRenderer.flipX = true;
+            Vector3 scale = transform.localScale;
+            scale.x = Mathf.Abs(scale.x) * -1;
+            transform.localScale = scale;
         }
         else{
-            _spriteRenderer.flipX = false;
-        }*/
+            Vector3 scale = transform.localScale;
+            scale.x = Mathf.Abs(scale.x);
+            transform.localScale = scale;
+        }
+        if(_rigidBody.velocity.y < 0 && !_dodged)
+        {
+            PlayerStates.Set(PlayerStates.AnimationParameter.Falling);
+            _falling = true;
+        }
         
 
     }
 
+    
     [SerializeField]
-    private float _slidingDampStrength;
+    private float _slidingDampStrength = 0;
     void FixedUpdate()
     {     
         if(_bDampVelocity) //(!_dodged || (_dodged &&
@@ -79,10 +89,10 @@ public class PlayerMovement : MonoBehaviour {
                 if(_dodged)
                 {
                     _dodged = false;
-                    PlayerStates.UnSet(PlayerStates.AnimationParameter.Dodging);
+                    PlayerStates.UnSet(PlayerStates.AnimationParameter.DodgeLanding);
                 }
                 _bDampVelocity = false;
-                PlayerStates.UnSet(PlayerStates.AnimationParameter.Stop);
+                //PlayerStates.UnSet(PlayerStates.AnimationParameter.Stop);
                 PlayerStates.Set(PlayerStates.AnimationParameter.Idling);
 
             }
@@ -121,7 +131,7 @@ public class PlayerMovement : MonoBehaviour {
                 _isRunKeyPressed = true;
                 PlayerStates.Set(PlayerStates.AnimationParameter.Running);
                 PlayerStates.UnSet(PlayerStates.AnimationParameter.Idling);
-                PlayerStates.UnSet(PlayerStates.AnimationParameter.Stop);
+               // PlayerStates.UnSet(PlayerStates.AnimationParameter.Stop);
             }
             else
             {
@@ -168,11 +178,11 @@ public class PlayerMovement : MonoBehaviour {
     private void Dodge()
     {
 
-        if(_dodged)
+        if(_dodged || !IsPlayerOnGround)
         {
             return;
         }
-        PlayerStates.Set(PlayerStates.AnimationParameter.Dodging);
+        PlayerStates.Set(PlayerStates.AnimationParameter.DodgingInAir);
         PlayerStates.UnSet(PlayerStates.AnimationParameter.Running);
         PlayerStates.UnSet(PlayerStates.AnimationParameter.Idling);
 
@@ -195,6 +205,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         if (IsPlayerOnGround)
         {
+            PlayerStates.Set(PlayerStates.AnimationParameter.Jump);
             Vector2 jumpVelocityVector = new Vector2(0, PhysicsHelper.GetVelocityToReachHeight(_jumpHeight));
             _rigidBody.velocity = jumpVelocityVector;
         }
@@ -209,12 +220,18 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
+
+    private const string TagGround = "Ground";
     //private bool _bDampDodge = false;
     protected void OnCollisionEnter2D(Collision2D col)
     {
+        
+       
         if(_dodged)
         {
-           
+
+            PlayerStates.UnSet(PlayerStates.AnimationParameter.DodgingInAir);
+            PlayerStates.Set(PlayerStates.AnimationParameter.DodgeLanding);
             //_bDampDodge = true;
             int directionMultiplier = (int)Mathf.Sign(_rigidBody.velocity.x);
             if(directionMultiplier == 0)
@@ -225,6 +242,11 @@ public class PlayerMovement : MonoBehaviour {
             _bDampVelocity = true;
 
         }
+        _falling = false;
+        PlayerStates.UnSet(PlayerStates.AnimationParameter.Falling);
+        PlayerStates.Set(PlayerStates.AnimationParameter.Landing);
+        PlayerStates.ResetTrigger(PlayerStates.AnimationParameter.Jump); 
+
     }
 
     
