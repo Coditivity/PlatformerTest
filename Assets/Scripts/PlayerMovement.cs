@@ -31,13 +31,16 @@ public class PlayerMovement : MonoBehaviour {
     private enum Direction { Left, Right}
     private Direction _playerFacingDirection;
 
+    SpriteRenderer _spriteRenderer;
+
 	// Use this for initialization
 	void Start () {
         
         _rigidBody = GetComponent<Rigidbody2D>();
         _mass = _rigidBody.mass;
         _boxCollider = GetComponent<BoxCollider2D>();
-        _playerFacingDirection = Direction.Right;           
+        _playerFacingDirection = Direction.Right;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         
 	}
 
@@ -52,18 +55,32 @@ public class PlayerMovement : MonoBehaviour {
         Physics2D.gravity = new Vector2(0, -gravityY); //recalculating gravity so that if it's changed during runtime, it's effect can be seen
 
         ProcessKeyPress();
+       /** if(_playerFacingDirection == Direction.Left)
+        {
+            _spriteRenderer.flipX = true;
+        }
+        else{
+            _spriteRenderer.flipX = false;
+        }*/
+        
+
     }
 
     [SerializeField]
     private float _slidingDampStrength;
     void FixedUpdate()
     {     
-        if(_bDampVelocity && !_dodged)
+        if(_bDampVelocity) //(!_dodged || (_dodged &&
         {
            
             float velX = _rigidBody.velocity.x;
             if(PhysicsHelper.dampFloat(ref velX, _slidingDampStrength))
             {
+                if(_dodged)
+                {
+                    _dodged = false;
+                    PlayerStates.UnSet(PlayerStates.AnimationParameter.Dodging);
+                }
                 _bDampVelocity = false;
                 PlayerStates.UnSet(PlayerStates.AnimationParameter.Stop);
                 PlayerStates.Set(PlayerStates.AnimationParameter.Idling);
@@ -85,49 +102,54 @@ public class PlayerMovement : MonoBehaviour {
     Direction _keyDirection = Direction.Left;
     private void ProcessKeyPress()
     {
-        
         float axisValue = Input.GetAxisRaw("Horizontal"); //don't need smoothing
-        if(axisValue<0) //leftwards movement
+        if (!_dodged)
         {
-            _playerFacingDirection = Direction.Left;
-            _keyDirection = Direction.Left;
-        }
-        else if(axisValue>0)
-        {
-            _playerFacingDirection = Direction.Right;
-            _keyDirection = Direction.Right;
-        }
-        if (axisValue!=0 || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
-        {
-            _isRunKeyPressed = true;
-            PlayerStates.Set(PlayerStates.AnimationParameter.Running);
-            PlayerStates.UnSet(PlayerStates.AnimationParameter.Idling);
-            PlayerStates.UnSet(PlayerStates.AnimationParameter.Stop);
-        }    
-        else
-        {
-            if (_isRunKeyPressed && !_dodged) //movement key(s)was pressed till now
+           
+            if (axisValue < 0) //leftwards movement
             {
-                PlayerStates.UnSet(PlayerStates.AnimationParameter.Running);
-                PlayerStates.UnSet(PlayerStates.AnimationParameter.Idling);
-                PlayerStates.Set(PlayerStates.AnimationParameter.Stop);
-                int directionMultiplier = 1;
-                if(_playerFacingDirection == Direction.Left)
-                {
-                    directionMultiplier = -1;
-                }
-                _rigidBody.velocity = new Vector2(_runSpeed * directionMultiplier, _rigidBody.velocity.y); //set rigidbody velocity so that it can be damped
-                
-                _bDampVelocity = true;
+                _playerFacingDirection = Direction.Left;
+                _keyDirection = Direction.Left;
             }
-            _isRunKeyPressed = false;
-            
-        }
-        
-        
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            Jump();
+            else if (axisValue > 0)
+            {
+                _playerFacingDirection = Direction.Right;
+                _keyDirection = Direction.Right;
+            }
+            if (axisValue != 0 || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+            {
+                _isRunKeyPressed = true;
+                PlayerStates.Set(PlayerStates.AnimationParameter.Running);
+                PlayerStates.UnSet(PlayerStates.AnimationParameter.Idling);
+                PlayerStates.UnSet(PlayerStates.AnimationParameter.Stop);
+            }
+            else
+            {
+                if (_isRunKeyPressed && !_dodged && Mathf.Abs(_rigidBody.velocity.x)>0) //movement key(s)was pressed till now
+                {
+                    PlayerStates.UnSet(PlayerStates.AnimationParameter.Running);
+                    PlayerStates.UnSet(PlayerStates.AnimationParameter.Idling);
+                    PlayerStates.Set(PlayerStates.AnimationParameter.Stop);
+                    int directionMultiplier = 1;
+                    if (_playerFacingDirection == Direction.Left)
+                    {
+                        directionMultiplier = -1;
+                    }
+                   
+                    _rigidBody.velocity = new Vector2(_runSpeed * directionMultiplier, _rigidBody.velocity.y); //set rigidbody velocity so that it can be damped
+
+                    
+                    _bDampVelocity = true;
+                }
+                _isRunKeyPressed = false;
+
+            }
+
+
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                Jump();
+            }
         }
         if (Input.GetKeyDown(KeyCode.J) && !_dodged)
         {
@@ -151,7 +173,8 @@ public class PlayerMovement : MonoBehaviour {
             return;
         }
         PlayerStates.Set(PlayerStates.AnimationParameter.Dodging);
-        
+        PlayerStates.UnSet(PlayerStates.AnimationParameter.Running);
+        PlayerStates.UnSet(PlayerStates.AnimationParameter.Idling);
 
         _dodged = true;
         if(_isRunKeyPressed) //a key is pressed
@@ -185,15 +208,14 @@ public class PlayerMovement : MonoBehaviour {
            
         }
     }
-    
 
+    //private bool _bDampDodge = false;
     protected void OnCollisionEnter2D(Collision2D col)
     {
         if(_dodged)
         {
-            PlayerStates.UnSet(PlayerStates.AnimationParameter.Dodging);
-            PlayerStates.Set(PlayerStates.AnimationParameter.Idling);
-            _dodged = false;
+           
+            //_bDampDodge = true;
             int directionMultiplier = (int)Mathf.Sign(_rigidBody.velocity.x);
             if(directionMultiplier == 0)
             {

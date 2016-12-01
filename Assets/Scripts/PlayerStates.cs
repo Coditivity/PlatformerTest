@@ -11,7 +11,7 @@ public class PlayerStates : MonoBehaviour {
         Crouching=2,
         Falling=3,
         Stop=4,
-        Dodging=5,
+        Dodging=5, 
         Jump=6,
         Land=7
     }
