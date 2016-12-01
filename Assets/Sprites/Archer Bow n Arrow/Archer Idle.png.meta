@@ -1,0 +1,967 @@
+fileFormatVersion: 2
+guid: 9d42641edadd2204ea594c44aa39d28e
+timeCreated: 1480519465
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Archer Idle_0
+    21300002: Archer Idle_1
+    21300004: Archer Idle_2
+    21300006: Archer Idle_3
+    21300008: Archer Idle_4
+    21300010: Archer Idle_5
+    21300012: Archer Idle_6
+    21300014: Archer Idle_7
+    21300016: Archer Idle_8
+    21300018: Archer Idle_9
+    21300020: Archer Idle_10
+    21300022: Archer Idle_11
+    21300024: Archer Idle_12
+    21300026: Archer Idle_13
+    21300028: Archer Idle_14
+    21300030: Archer Idle_15
+    21300032: Archer Idle_16
+    21300034: Archer Idle_17
+    21300036: Archer Idle_18
+    21300038: Archer Idle_19
+    21300040: Archer Idle_20
+    21300042: Archer Idle_21
+    21300044: Archer Idle_22
+    21300046: Archer Idle_23
+    21300048: Archer Idle_24
+    21300050: Archer Idle_25
+    21300052: Archer Idle_26
+    21300054: Archer Idle_27
+    21300056: Archer Idle_28
+    21300058: Archer Idle_29
+    21300060: Archer Idle_30
+    21300062: Archer Idle_31
+    21300064: Archer Idle_32
+    21300066: Archer Idle_33
+    21300068: Archer Idle_34
+    21300070: Archer Idle_35
+    21300072: Archer Idle_36
+    21300074: Archer Idle_37
+    21300076: Archer Idle_38
+    21300078: Archer Idle_39
+    21300080: Archer Idle_40
+    21300082: Archer Idle_41
+    21300084: Archer Idle_42
+    21300086: Archer Idle_43
+    21300088: Archer Idle_44
+    21300090: Archer Idle_45
+    21300092: Archer Idle_46
+    21300094: Archer Idle_47
+    21300096: Archer Idle_48
+    21300098: Archer Idle_49
+    21300100: Archer Idle_50
+    21300102: Archer Idle_51
+    21300104: Archer Idle_52
+    21300106: Archer Idle_53
+    21300108: Archer Idle_54
+    21300110: Archer Idle_55
+    21300112: Archer Idle_56
+    21300114: Archer Idle_57
+    21300116: Archer Idle_58
+    21300118: Archer Idle_59
+    21300120: Archer Idle_60
+    21300122: Archer Idle_61
+    21300124: Archer Idle_62
+    21300126: Archer Idle_63
+    21300128: Archer Idle_64
+    21300130: Archer Idle_65
+    21300132: Archer Idle_66
+    21300134: Archer Idle_67
+    21300136: Archer Idle instance 10000
+    21300138: Archer Idle instance 10001
+    21300140: Archer Idle instance 10002
+    21300142: Archer Idle instance 10003
+    21300144: Archer Idle instance 10004
+    21300146: Archer Idle instance 10005
+    21300148: Archer Idle instance 10006
+    21300150: Archer Idle instance 10007
+    21300152: Archer Idle instance 10008
+    21300154: Archer Idle instance 10009
+    21300156: Archer Idle instance 10010
+    21300158: Archer Idle instance 10011
+    21300160: Archer Idle instance 10012
+    21300162: Archer Idle instance 10013
+    21300164: Archer Idle instance 10014
+    21300166: Archer Idle instance 10015
+    21300168: Archer Idle instance 10016
+    21300170: Archer Idle instance 10017
+    21300172: Archer Idle instance 10018
+    21300174: Archer Idle instance 10019
+    21300176: Archer Idle instance 10020
+    21300178: Archer Idle instance 10021
+    21300180: Archer Idle instance 10022
+    21300182: Archer Idle instance 10023
+    21300184: Archer Idle instance 10024
+    21300186: Archer Idle instance 10025
+    21300188: Archer Idle instance 10026
+    21300190: Archer Idle instance 10027
+    21300192: Archer Idle instance 10028
+    21300194: Archer Idle instance 10029
+    21300196: Archer Idle instance 10030
+    21300198: Archer Idle instance 10031
+    21300200: Archer Idle instance 10032
+    21300202: Archer Idle instance 10033
+    21300204: Archer Idle instance 10034
+    21300206: Archer Idle instance 10035
+    21300208: Archer Idle instance 10036
+    21300210: Archer Idle instance 10037
+    21300212: Archer Idle instance 10038
+    21300214: Archer Idle instance 10039
+    21300216: Archer Idle instance 10040
+    21300218: Archer Idle instance 10041
+    21300220: Archer Idle instance 10042
+    21300222: Archer Idle instance 10043
+    21300224: Archer Idle instance 10044
+    21300226: Archer Idle instance 10045
+    21300228: Archer Idle instance 10046
+    21300230: Archer Idle instance 10047
+    21300232: Archer Idle instance 10048
+    21300234: Archer Idle instance 10049
+    21300236: Archer Idle instance 10050
+    21300238: Archer Idle instance 10051
+    21300240: Archer Idle instance 10052
+    21300242: Archer Idle instance 10053
+    21300244: Archer Idle instance 10054
+    21300246: Archer Idle instance 10055
+    21300248: Archer Idle instance 10056
+    21300250: Archer Idle instance 10057
+    21300252: Archer Idle instance 10058
+    21300254: Archer Idle instance 10059
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 8192
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Archer Idle instance 10000
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 3617
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10001
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 3617
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10002
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 3617
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10003
+      rect:
+        serializedVersion: 2
+        x: 1397
+        y: 3617
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10004
+      rect:
+        serializedVersion: 2
+        x: 1862
+        y: 3617
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10005
+      rect:
+        serializedVersion: 2
+        x: 2327
+        y: 3617
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10006
+      rect:
+        serializedVersion: 2
+        x: 2792
+        y: 3617
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10007
+      rect:
+        serializedVersion: 2
+        x: 3257
+        y: 3617
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10008
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 3130
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10009
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 3130
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10010
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 3130
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10011
+      rect:
+        serializedVersion: 2
+        x: 1397
+        y: 3130
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10012
+      rect:
+        serializedVersion: 2
+        x: 1862
+        y: 3130
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10013
+      rect:
+        serializedVersion: 2
+        x: 2327
+        y: 3130
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10014
+      rect:
+        serializedVersion: 2
+        x: 2792
+        y: 3130
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10015
+      rect:
+        serializedVersion: 2
+        x: 3257
+        y: 3130
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10016
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 2643
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10017
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 2643
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10018
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 2643
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10019
+      rect:
+        serializedVersion: 2
+        x: 1397
+        y: 2643
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10020
+      rect:
+        serializedVersion: 2
+        x: 1862
+        y: 2643
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10021
+      rect:
+        serializedVersion: 2
+        x: 2327
+        y: 2643
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10022
+      rect:
+        serializedVersion: 2
+        x: 2792
+        y: 2643
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10023
+      rect:
+        serializedVersion: 2
+        x: 3257
+        y: 2643
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10024
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 2156
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10025
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 2156
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10026
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 2156
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10027
+      rect:
+        serializedVersion: 2
+        x: 1397
+        y: 2156
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10028
+      rect:
+        serializedVersion: 2
+        x: 1862
+        y: 2156
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10029
+      rect:
+        serializedVersion: 2
+        x: 2327
+        y: 2156
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10030
+      rect:
+        serializedVersion: 2
+        x: 2792
+        y: 2156
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10031
+      rect:
+        serializedVersion: 2
+        x: 3257
+        y: 2156
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10032
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1669
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10033
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 1669
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10034
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 1669
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10035
+      rect:
+        serializedVersion: 2
+        x: 1397
+        y: 1669
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10036
+      rect:
+        serializedVersion: 2
+        x: 1862
+        y: 1669
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10037
+      rect:
+        serializedVersion: 2
+        x: 2327
+        y: 1669
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10038
+      rect:
+        serializedVersion: 2
+        x: 2792
+        y: 1669
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10039
+      rect:
+        serializedVersion: 2
+        x: 3257
+        y: 1669
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10040
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1182
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10041
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 1182
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10042
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 1182
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10043
+      rect:
+        serializedVersion: 2
+        x: 1397
+        y: 1182
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10044
+      rect:
+        serializedVersion: 2
+        x: 1862
+        y: 1182
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10045
+      rect:
+        serializedVersion: 2
+        x: 2327
+        y: 1182
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10046
+      rect:
+        serializedVersion: 2
+        x: 2792
+        y: 1182
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10047
+      rect:
+        serializedVersion: 2
+        x: 3257
+        y: 1182
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10048
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 695
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10049
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 695
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10050
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 695
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10051
+      rect:
+        serializedVersion: 2
+        x: 1397
+        y: 695
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10052
+      rect:
+        serializedVersion: 2
+        x: 1862
+        y: 695
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10053
+      rect:
+        serializedVersion: 2
+        x: 2327
+        y: 695
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10054
+      rect:
+        serializedVersion: 2
+        x: 2792
+        y: 695
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10055
+      rect:
+        serializedVersion: 2
+        x: 3257
+        y: 695
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10056
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 208
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10057
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 208
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10058
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 208
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Archer Idle instance 10059
+      rect:
+        serializedVersion: 2
+        x: 1397
+        y: 208
+        width: 455
+        height: 477
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
