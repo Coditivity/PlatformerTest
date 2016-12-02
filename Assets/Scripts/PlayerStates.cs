@@ -14,7 +14,8 @@ public class PlayerStates : MonoBehaviour {
         DodgingInAir = 5, 
         Jump=6,
         Landing=7,
-        DodgeLanding=8
+        DodgeLanding=8,
+        Dodge=9
     }
 
     private static PlayerStates s_instance = null;
@@ -27,8 +28,7 @@ public class PlayerStates : MonoBehaviour {
     private AnimationParameterInfo[] animatorParameters = null;
     
     public static void Set(AnimationParameter parameter)
-    {
-      
+    {        
         s_instance.animatorParameters[(int)parameter].Set();
         
     }
@@ -51,6 +51,7 @@ public class PlayerStates : MonoBehaviour {
         {
             ap.CalculateHash();
         }
+        Debug.LogError(animatorParameters.Length);
 	}
 	
 	// Update is called once per frame
