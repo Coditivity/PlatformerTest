@@ -20,6 +20,12 @@ public class PhysicsHelper  {
         vectorToBeDamped = vectorToBeDamped.normalized * vecMag; //apply the new damped magnitude to the vector
     }
 
+    public static float GetObjectToGroundDistance(Collider2D collider, LayerMask collidableLayersMask )
+    {
+        RaycastHit2D rayHit = Physics2D.Raycast(collider.bounds.center, Vector2.down, int.MaxValue, collidableLayersMask);
+        return rayHit.distance;
+    }
+
     /// <summary>
     /// Damps a value (positive or negative) towards zero.
     /// </summary>

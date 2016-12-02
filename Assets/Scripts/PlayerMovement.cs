@@ -1,27 +1,46 @@
-﻿using UnityEngine;
+﻿#define DEVELOPMENT
+using UnityEngine;
 using System.Collections;
 using UnityEditor;
 
 public class PlayerMovement : MonoBehaviour {
 
+    [Tooltip("The speed at which the player moves horizontally when running")]
     [SerializeField]
     private float _runSpeed;
     [SerializeField]
+    [Tooltip("The max height player can jump")]
     private float _jumpHeight;
     [SerializeField]
+    [Tooltip("The maximum downwards speed attainable by player when falling")]
     private float _fallSpeedMax;
     [SerializeField]
+    [Tooltip("Horizontal distance travelled by player when dodging. You may have to adjust 'dodge speed' after adjusting this.")]
     private float _dodgeDistance;
     [SerializeField]
+    [Tooltip("How fast the player should cover the dodge distance")]
     private float _dodgeSpeed;
     [SerializeField]
+    [Tooltip("Duration for which player will slide for after stopping or dodging")]
+    private float _slidingTime = 1;
+    [SerializeField]
+    [Tooltip("How far the player will slide for after stopping or dodging")]
+    private float _slidingDistance = .4f;
+    [SerializeField]
+    [Tooltip("Player will be ready for the next action only after dodgeCooldown and sliding time (See 'sliding time') is reached")]
+    private float _dodgeCoolDownTime = 1f;
+    [SerializeField]
+    [Tooltip("Layers representing standable object in game, such as ground")]
     private LayerMask _standableObjectLayerMask;
-    
 
+    private float _slidingDampStrength = 0;
     private Rigidbody2D _rigidBody;
     private float _mass;
     private BoxCollider2D _boxCollider;
 
+    
+    private float _dodgeTimeProgress = 0;
+    [Tooltip("Gravity used to calculate falling acceleration, velocity etc.")]
     public float gravityY;
 
     private enum Direction { Left, Right}
@@ -46,8 +65,13 @@ public class PlayerMovement : MonoBehaviour {
         _boxCollider = GetComponent<BoxCollider2D>();
         _playerFacingDirection = Direction.Right;
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        
-	}
+        _slidingDampStrength = -2 * (_slidingDistance - _runSpeed * _slidingTime) / (_slidingTime * _slidingTime);// S=ut+1/2at^2
+        float timeOfFlight = _dodgeDistance / _dodgeSpeed;
+        float dodgeYVel = -Physics.gravity.y * timeOfFlight;
+        _dodgeAnimToFallOverrideDistance = dodgeYVel * timeOfFlight + .5f * Physics.gravity.y * timeOfFlight * timeOfFlight + .01f;
+
+
+    }
 
     void OnDestroy()
     {
@@ -61,9 +85,20 @@ public class PlayerMovement : MonoBehaviour {
     private bool _falling = false;
     private float _prevVelocityY = 0;
 
+    
+    private float _dodgeAnimToFallOverrideDistance = 1;
+    [SerializeField]
+    [Tooltip("If enabled, will play falling animation if falls down when doing a dodge at cliff edge")] 
+    private bool _playFallingAnimationWhenJumpingOffCliff = true;
     void Update()
     {
+#if DEVELOPMENT
+        _slidingDampStrength = -2 * (_slidingDistance - _runSpeed * _slidingTime) / (_slidingTime * _slidingTime);// S=ut+1/2at^2 //recalculating sliding damp strength so that it can be tweaked in the editro at runtime
         Physics2D.gravity = new Vector2(0, -gravityY); //recalculating gravity so that if it's changed during runtime, it's effect can be seen
+        float timeOfFlight = _dodgeDistance / _dodgeSpeed;
+        float dodgeYVel = -Physics.gravity.y * timeOfFlight;
+        _dodgeAnimToFallOverrideDistance = dodgeYVel * timeOfFlight + .5f * Physics.gravity.y * timeOfFlight * timeOfFlight + .01f;
+#endif
 
         ProcessKeyPress();
         if(_playerFacingDirection == Direction.Left)
@@ -77,23 +112,80 @@ public class PlayerMovement : MonoBehaviour {
             scale.x = Mathf.Abs(scale.x);
             transform.localScale = scale;
         }
-        if(_rigidBody.velocity.y < 0 && !_dodged)
+        if(_rigidBody.velocity.y < 0 )
         {
-            PlayerStates.Set(PlayerStates.AnimationParameter.Falling);
-            PlayerStates.UnSet(PlayerStates.AnimationParameter.Running);
-            PlayerStates.UnSet(PlayerStates.AnimationParameter.Idling);
-            _falling = true;
-            _landed = false;
+            
+            if (!_dodged)
+            {
+                PlayerStates.Set(PlayerStates.AnimationParameter.Falling);
+                PlayerStates.UnSet(PlayerStates.AnimationParameter.Running);
+                PlayerStates.UnSet(PlayerStates.AnimationParameter.Idling);
+                _falling = true;
+                _landed = false;
+            }
+           
+
+            else if(PhysicsHelper.GetObjectToGroundDistance(_boxCollider, _standableObjectLayerMask) > _dodgeAnimToFallOverrideDistance)
+            {
+                if (_playFallingAnimationWhenJumpingOffCliff) {
+                    PlayerStates.Set(PlayerStates.AnimationParameter.Falling);
+                    PlayerStates.UnSet(PlayerStates.AnimationParameter.Running);
+                    PlayerStates.UnSet(PlayerStates.AnimationParameter.Idling);
+                    PlayerStates.UnSet(PlayerStates.AnimationParameter.DodgingInAir);
+                    PlayerStates.UnSet(PlayerStates.AnimationParameter.DodgeLanding);
+                    _falling = true;
+                    _landed = false;
+                    _dodged = false;
+                    SetVelocityForDampingForDodge();
+                }
+            }
+           /* else if(_fallDuration >= timeForOverridingDodgeWithFall)
+            {
+                Debug.LogError("entered");
+                PlayerStates.Set(PlayerStates.AnimationParameter.Falling);
+                PlayerStates.UnSet(PlayerStates.AnimationParameter.Running);
+                PlayerStates.UnSet(PlayerStates.AnimationParameter.Idling);
+                PlayerStates.UnSet(PlayerStates.AnimationParameter.DodgingInAir);
+                PlayerStates.UnSet(PlayerStates.AnimationParameter.DodgeLanding);
+                _falling = true;
+                _landed = false;
+                _dodged = false;
+                SetVelocityForDampingForDodge();
+            }
+            if(_dodged)
+            {
+                _fallDuration += Time.deltaTime;
+            }
+            else
+            {
+                if(_fallDuration!=0)
+                {
+                    Debug.LogError("_fallDur>>" + _fallDuration);
+                }
+                _fallDuration = 0;
+            }*/
         }
+   /*     else
+        {
+            _fallDuration = 0;
+        }*/
         
             
-        
+        if(_dodged)
+        {
+            _dodgeTimeProgress += Time.deltaTime;
+            if (_dodgeTimeProgress >= _dodgeCoolDownTime && _rigidBody.velocity.x ==0 )
+            {
+                _dodged = false;
+                PlayerStates.UnSet(PlayerStates.AnimationParameter.DodgeLanding);
+                PlayerStates.UnSet(PlayerStates.AnimationParameter.DodgingInAir);
+            }
+        }        
 
     }
 
     
-    [SerializeField]
-    private float _slidingDampStrength = 0;
+    
     void FixedUpdate()
     {
         
@@ -108,7 +200,6 @@ public class PlayerMovement : MonoBehaviour {
             if(_dodged && _rigidBody.velocity.y <0 && _landed) //is falling after dodge-landing on an edge
             {
                 //EditorApplication.isPaused = true;
-               // Debug.LogError("yup");
                 _dodged = false;
                 PlayerStates.UnSet(PlayerStates.AnimationParameter.DodgingInAir);
                 PlayerStates.UnSet(PlayerStates.AnimationParameter.DodgeLanding);
@@ -117,16 +208,18 @@ public class PlayerMovement : MonoBehaviour {
                 _landed = false;
                 
                 
+                
                // _bDampVelocity = false;
             }
             if(PhysicsHelper.dampFloat(ref velX, _slidingDampStrength))
             {
                 if(_dodged)
                 {
-                    
-                    _dodged = false;
-                    PlayerStates.UnSet(PlayerStates.AnimationParameter.DodgeLanding);
-                    PlayerStates.UnSet(PlayerStates.AnimationParameter.DodgingInAir);
+                    if (_dodgeTimeProgress >= _dodgeCoolDownTime) {
+                        _dodged = false;
+                        PlayerStates.UnSet(PlayerStates.AnimationParameter.DodgeLanding);
+                        PlayerStates.UnSet(PlayerStates.AnimationParameter.DodgingInAir);
+                    }
                 }
                 _bDampVelocity = false;
                 //PlayerStates.UnSet(PlayerStates.AnimationParameter.Stop);
@@ -274,6 +367,7 @@ public class PlayerMovement : MonoBehaviour {
             return;
         }
         _landed = false;
+        _dodgeTimeProgress = 0;
         PlayerStates.Set(PlayerStates.AnimationParameter.DodgingInAir);
         PlayerStates.UnSet(PlayerStates.AnimationParameter.Running);
         PlayerStates.UnSet(PlayerStates.AnimationParameter.Idling);

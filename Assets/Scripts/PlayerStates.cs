@@ -51,7 +51,6 @@ public class PlayerStates : MonoBehaviour {
         {
             ap.CalculateHash();
         }
-        Debug.LogError(animatorParameters.Length);
 	}
 	
 	// Update is called once per frame
