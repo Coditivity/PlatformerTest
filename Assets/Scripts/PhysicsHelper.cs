@@ -20,11 +20,30 @@ public class PhysicsHelper  {
         vectorToBeDamped = vectorToBeDamped.normalized * vecMag; //apply the new damped magnitude to the vector
     }
 
+    public static bool CollidingWithSomethingOnRight(Collider2D collider, LayerMask collidableLayersMask)
+    {
+        Vector3 rightEdgePos = collider.bounds.min;
+        rightEdgePos.x = collider.bounds.max.x ;
+        return Physics2D.Raycast(rightEdgePos, Vector2.right, int.MaxValue, collidableLayersMask).distance <= .02f;
+    }
+    public static bool CollidingWithSomethingOnLeft(Collider2D collider, LayerMask collidableLayersMask)
+    {        
+        return Physics2D.Raycast(collider.bounds.min, Vector2.left, int.MaxValue, collidableLayersMask).distance <= .02f;
+    }
+
+    public static bool CollidingWithSomethingOnEitherSide(Collider2D collider, LayerMask collidableLayersMask)
+    {
+        return CollidingWithSomethingOnRight(collider, collidableLayersMask)
+            || CollidingWithSomethingOnLeft(collider, collidableLayersMask);
+    }
+
     public static float GetObjectToGroundDistance(Collider2D collider, LayerMask collidableLayersMask )
     {
-        RaycastHit2D rayHitLeftEdge = Physics2D.Raycast(collider.bounds.min, Vector2.down, int.MaxValue, collidableLayersMask);
+        Vector3 leftEdgePos = collider.bounds.min;
+        leftEdgePos.x -= 1f;
+        RaycastHit2D rayHitLeftEdge = Physics2D.Raycast(leftEdgePos, Vector2.down, int.MaxValue, collidableLayersMask);
         Vector3 rightEdgePos = collider.bounds.min;
-        rightEdgePos.x = collider.bounds.max.x;
+        rightEdgePos.x = collider.bounds.max.x + 1f;
         RaycastHit2D rayHitRightEdge = Physics2D.Raycast(rightEdgePos, Vector2.down, int.MaxValue, collidableLayersMask);        
         return Mathf.Min(rayHitLeftEdge.distance, rayHitRightEdge.distance);
     }

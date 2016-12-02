@@ -423,8 +423,11 @@ public class PlayerMovement : MonoBehaviour {
             directionMultiplier = -1;
         }
 
-        if (Mathf.Abs(_rigidBody.velocity.x) > 0)
+        if (Mathf.Abs(_rigidBody.velocity.x) > 0 
+           // && !PhysicsHelper.CollidingWithSomethingOnEitherSide(_boxCollider, _standableObjectLayerMask)
+           )
         {
+            //Debug.LogError("setting for damp");
             _rigidBody.velocity = new Vector2(_runSpeed * directionMultiplier, _rigidBody.velocity.y); //set rigidbody velocity so that it can be damped
             _bDampVelocity = true;
         }
@@ -443,6 +446,7 @@ public class PlayerMovement : MonoBehaviour {
             directionMultiplier = 1;
         }
         _rigidBody.velocity = new Vector2(_runSpeed * directionMultiplier, _rigidBody.velocity.y); //setting runspeed as x component so that a consistent sliding distance can be acheived after dodging and movement halts
+        //Debug.LogError("setting vel for damp");
         _bDampVelocity = true;
     }
 
@@ -458,9 +462,15 @@ public class PlayerMovement : MonoBehaviour {
             //_bDampDodge = true;            
             SetVelocityForDampingForDodge();
         }
+        else if (!_isRunKeyPressed)
+        {
+            SetVelocityForDamping();
+        }
         _falling = false;
+        
         PlayerStates.UnSet(PlayerStates.AnimationParameter.Falling);
         PlayerStates.ResetTrigger(PlayerStates.AnimationParameter.Jump);
+        
     }
     private const string TagGround = "Ground";
     //private bool _bDampDodge = false;
