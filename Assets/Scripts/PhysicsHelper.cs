@@ -22,8 +22,11 @@ public class PhysicsHelper  {
 
     public static float GetObjectToGroundDistance(Collider2D collider, LayerMask collidableLayersMask )
     {
-        RaycastHit2D rayHit = Physics2D.Raycast(collider.bounds.center, Vector2.down, int.MaxValue, collidableLayersMask);
-        return rayHit.distance;
+        RaycastHit2D rayHitLeftEdge = Physics2D.Raycast(collider.bounds.min, Vector2.down, int.MaxValue, collidableLayersMask);
+        Vector3 rightEdgePos = collider.bounds.min;
+        rightEdgePos.x = collider.bounds.max.x;
+        RaycastHit2D rayHitRightEdge = Physics2D.Raycast(rightEdgePos, Vector2.down, int.MaxValue, collidableLayersMask);        
+        return Mathf.Min(rayHitLeftEdge.distance, rayHitRightEdge.distance);
     }
 
     /// <summary>

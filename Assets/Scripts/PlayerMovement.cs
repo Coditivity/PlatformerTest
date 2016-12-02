@@ -55,6 +55,17 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
+    public static BoxCollider2D PlayerCollider
+    {
+        get
+        {
+            return s_instance._boxCollider;
+        }
+        set
+        {
+            s_instance._boxCollider = value;
+        }
+    }
     private static PlayerMovement s_instance;
 	// Use this for initialization
 	void Start () {
@@ -117,9 +128,7 @@ public class PlayerMovement : MonoBehaviour {
             
             if (!_dodged)
             {
-                PlayerStates.Set(PlayerStates.AnimationParameter.Falling);
-                PlayerStates.UnSet(PlayerStates.AnimationParameter.Running);
-                PlayerStates.UnSet(PlayerStates.AnimationParameter.Idling);
+                PlayerAnimationHandler.OnFall();                
                 _falling = true;
                 _landed = false;
             }
@@ -128,11 +137,7 @@ public class PlayerMovement : MonoBehaviour {
             else if(PhysicsHelper.GetObjectToGroundDistance(_boxCollider, _standableObjectLayerMask) > _dodgeAnimToFallOverrideDistance)
             {
                 if (_playFallingAnimationWhenJumpingOffCliff) {
-                    PlayerStates.Set(PlayerStates.AnimationParameter.Falling);
-                    PlayerStates.UnSet(PlayerStates.AnimationParameter.Running);
-                    PlayerStates.UnSet(PlayerStates.AnimationParameter.Idling);
-                    PlayerStates.UnSet(PlayerStates.AnimationParameter.DodgingInAir);
-                    PlayerStates.UnSet(PlayerStates.AnimationParameter.DodgeLanding);
+                    PlayerAnimationHandler.OnFallDodge();                    
                     _falling = true;
                     _landed = false;
                     _dodged = false;
@@ -177,8 +182,7 @@ public class PlayerMovement : MonoBehaviour {
             if (_dodgeTimeProgress >= _dodgeCoolDownTime && _rigidBody.velocity.x ==0 )
             {
                 _dodged = false;
-                PlayerStates.UnSet(PlayerStates.AnimationParameter.DodgeLanding);
-                PlayerStates.UnSet(PlayerStates.AnimationParameter.DodgingInAir);
+                PlayerAnimationHandler.OnDodgeEnd();                
             }
         }        
 
@@ -201,9 +205,7 @@ public class PlayerMovement : MonoBehaviour {
             {
                 //EditorApplication.isPaused = true;
                 _dodged = false;
-                PlayerStates.UnSet(PlayerStates.AnimationParameter.DodgingInAir);
-                PlayerStates.UnSet(PlayerStates.AnimationParameter.DodgeLanding);
-                PlayerStates.Set(PlayerStates.AnimationParameter.Falling);
+                PlayerAnimationHandler.OnDodgeEndLandFall();                
                 _falling = true;
                 _landed = false;
                 
@@ -217,13 +219,14 @@ public class PlayerMovement : MonoBehaviour {
                 {
                     if (_dodgeTimeProgress >= _dodgeCoolDownTime) {
                         _dodged = false;
-                        PlayerStates.UnSet(PlayerStates.AnimationParameter.DodgeLanding);
-                        PlayerStates.UnSet(PlayerStates.AnimationParameter.DodgingInAir);
+                        PlayerAnimationHandler.OnDodgeEndDamp();
+                        
                     }
                 }
                 _bDampVelocity = false;
                 //PlayerStates.UnSet(PlayerStates.AnimationParameter.Stop);
-                PlayerStates.Set(PlayerStates.AnimationParameter.Idling);
+                PlayerAnimationHandler.OnDamp();
+                
 
             }
             _rigidBody.velocity = new Vector2(velX, _rigidBody.velocity.y);
@@ -270,9 +273,11 @@ public class PlayerMovement : MonoBehaviour {
                 _isRunKeyPressed = true;
                 if (IsPlayerOnGround && !_isCrouching)
                 {
-                    PlayerStates.Set(PlayerStates.AnimationParameter.Running);                    
+                    PlayerAnimationHandler.OnRun();
+                                      
                 }
-                PlayerStates.UnSet(PlayerStates.AnimationParameter.Idling);
+                PlayerAnimationHandler.OnUnIdle();
+                
                 // PlayerStates.UnSet(PlayerStates.AnimationParameter.Stop);
             }
             else
@@ -281,10 +286,11 @@ public class PlayerMovement : MonoBehaviour {
                 {
                     if (!_isCrouching)
                     {
-                        PlayerStates.Set(PlayerStates.AnimationParameter.Stop);
+                        PlayerAnimationHandler.OnStop();
+                        
                     }
-                    PlayerStates.UnSet(PlayerStates.AnimationParameter.Running);
-                    PlayerStates.UnSet(PlayerStates.AnimationParameter.Idling);
+                    PlayerAnimationHandler.OnNoMoveKeysPressed();
+                    
                     /*int directionMultiplier = 1;
                     if (_playerFacingDirection == Direction.Left)
                     {
@@ -301,7 +307,7 @@ public class PlayerMovement : MonoBehaviour {
                 _isRunKeyPressed = false;
                 if(IsPlayerOnGround)
                 {
-                    PlayerStates.Set(PlayerStates.AnimationParameter.Idling); //if on ground and no key is pressed, should be idling
+                    PlayerAnimationHandler.OnIdling();            //if on ground and no key is pressed, should be idling
                 }
                 
 
