@@ -1,7 +1,6 @@
 ﻿#define DEVELOPMENT
 using UnityEngine;
 using System.Collections;
-using UnityEditor;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -144,36 +143,13 @@ public class PlayerMovement : MonoBehaviour {
                     SetVelocityForDampingForDodge();
                 }
             }
-           /* else if(_fallDuration >= timeForOverridingDodgeWithFall)
-            {
-                Debug.LogError("entered");
-                PlayerStates.Set(PlayerStates.AnimationParameter.Falling);
-                PlayerStates.UnSet(PlayerStates.AnimationParameter.Running);
-                PlayerStates.UnSet(PlayerStates.AnimationParameter.Idling);
-                PlayerStates.UnSet(PlayerStates.AnimationParameter.DodgingInAir);
-                PlayerStates.UnSet(PlayerStates.AnimationParameter.DodgeLanding);
-                _falling = true;
-                _landed = false;
-                _dodged = false;
-                SetVelocityForDampingForDodge();
-            }
-            if(_dodged)
-            {
-                _fallDuration += Time.deltaTime;
-            }
-            else
-            {
-                if(_fallDuration!=0)
-                {
-                    Debug.LogError("_fallDur>>" + _fallDuration);
-                }
-                _fallDuration = 0;
-            }*/
+          
         }
-   /*     else
+       /* else if(_rigidBody.velocity.y > 0)
         {
-            _fallDuration = 0;
+            _jumping = true;
         }*/
+   
         
             
         if(_dodged)
@@ -184,7 +160,9 @@ public class PlayerMovement : MonoBehaviour {
                 _dodged = false;
                 PlayerAnimationHandler.OnDodgeEnd();                
             }
-        }        
+        }
+
+        
 
     }
 
@@ -193,7 +171,7 @@ public class PlayerMovement : MonoBehaviour {
     void FixedUpdate()
     {
         
-        if (_prevVelocityY < 0 && _rigidBody.velocity.y == 0) //player has landed from a jump or fall
+        if (_prevVelocityY < 0 && _rigidBody.velocity.y >= 0) //player has landed from a jump or fall
         {
             
             OnLanding();
@@ -284,25 +262,22 @@ public class PlayerMovement : MonoBehaviour {
             {
                 if (_isRunKeyPressed && !_dodged ) //movement key(s)was pressed till now
                 {
-                    if (!_isCrouching)
-                    {
-                        PlayerAnimationHandler.OnStop();
-                        
-                    }
-                    PlayerAnimationHandler.OnNoMoveKeysPressed();
                     
-                    /*int directionMultiplier = 1;
-                    if (_playerFacingDirection == Direction.Left)
+                    PlayerAnimationHandler.OnNoMoveKeysPressed();
+                   
+                    if (PhysicsHelper.CollidingWithSomethingOnEitherSide(_boxCollider, _standableObjectLayerMask))
                     {
-                        directionMultiplier = -1;
+                        PlayerStates.Set(PlayerStates.AnimationParameter.DirectIdle);
                     }
-
-                    if (Mathf.Abs(_rigidBody.velocity.x) > 0)
+                    else 
                     {
-                        _rigidBody.velocity = new Vector2(_runSpeed * directionMultiplier, _rigidBody.velocity.y); //set rigidbody velocity so that it can be damped
-                        _bDampVelocity = true;
-                    }*/
-                    SetVelocityForDamping();
+                        if (!_isCrouching)
+                        {
+                            PlayerAnimationHandler.OnStop();
+
+                        }
+                        SetVelocityForDamping();
+                    }
                 }
                 _isRunKeyPressed = false;
                 if(IsPlayerOnGround)
@@ -394,12 +369,16 @@ public class PlayerMovement : MonoBehaviour {
         float dodgeYVel = -Physics.gravity.y * timeOfFlight;        
         _rigidBody.velocity = new Vector2(_dodgeSpeed * horizontalVelocityDirection, dodgeYVel);//.Set(dodgeHVel, _dodgeYVel);
     }
+
+    int jumpTrigsetcount = 0;
+    bool _jumping = false;
     private void Jump()
     {
-        if (IsPlayerOnGround)
+        if (IsPlayerOnGround && _landed)
         {
             PlayerStates.UnSet(PlayerStates.AnimationParameter.Running);            
             PlayerStates.Set(PlayerStates.AnimationParameter.Jump);
+            PlayerStates.Set(PlayerStates.AnimationParameter.Jumping);
             Vector2 jumpVelocityVector = new Vector2(0, PhysicsHelper.GetVelocityToReachHeight(_jumpHeight));
             _rigidBody.velocity = jumpVelocityVector;
         }
@@ -423,9 +402,7 @@ public class PlayerMovement : MonoBehaviour {
             directionMultiplier = -1;
         }
 
-        if (Mathf.Abs(_rigidBody.velocity.x) > 0 
-           // && !PhysicsHelper.CollidingWithSomethingOnEitherSide(_boxCollider, _standableObjectLayerMask)
-           )
+        if (Mathf.Abs(_rigidBody.velocity.x) > 0  )
         {
             //Debug.LogError("setting for damp");
             _rigidBody.velocity = new Vector2(_runSpeed * directionMultiplier, _rigidBody.velocity.y); //set rigidbody velocity so that it can be damped
@@ -452,6 +429,7 @@ public class PlayerMovement : MonoBehaviour {
 
     
     bool _landed = false;
+    int fallUsetCount = 0;
     private void OnLanding()
     {
         _landed = true;
@@ -462,15 +440,16 @@ public class PlayerMovement : MonoBehaviour {
             //_bDampDodge = true;            
             SetVelocityForDampingForDodge();
         }
-        else if (!_isRunKeyPressed)
+      /*  else if (!_isRunKeyPressed)
         {
             SetVelocityForDamping();
-        }
+        }*/
         _falling = false;
         
         PlayerStates.UnSet(PlayerStates.AnimationParameter.Falling);
         PlayerStates.ResetTrigger(PlayerStates.AnimationParameter.Jump);
-        
+        PlayerStates.UnSet(PlayerStates.AnimationParameter.Jumping);
+
     }
     private const string TagGround = "Ground";
     //private bool _bDampDodge = false;

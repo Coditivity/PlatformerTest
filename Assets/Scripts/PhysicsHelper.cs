@@ -24,11 +24,11 @@ public class PhysicsHelper  {
     {
         Vector3 rightEdgePos = collider.bounds.min;
         rightEdgePos.x = collider.bounds.max.x ;
-        return Physics2D.Raycast(rightEdgePos, Vector2.right, int.MaxValue, collidableLayersMask).distance <= .02f;
+        return Physics2D.Raycast(rightEdgePos, Vector2.right, int.MaxValue, collidableLayersMask).distance <= 1f;
     }
     public static bool CollidingWithSomethingOnLeft(Collider2D collider, LayerMask collidableLayersMask)
     {        
-        return Physics2D.Raycast(collider.bounds.min, Vector2.left, int.MaxValue, collidableLayersMask).distance <= .02f;
+        return Physics2D.Raycast(collider.bounds.min, Vector2.left, int.MaxValue, collidableLayersMask).distance <= 1f;
     }
 
     public static bool CollidingWithSomethingOnEitherSide(Collider2D collider, LayerMask collidableLayersMask)

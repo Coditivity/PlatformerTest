@@ -15,7 +15,9 @@ public class PlayerStates : MonoBehaviour {
         Jump=6,
         Landing=7,
         DodgeLanding=8,
-        Dodge=9
+        Dodge=9,
+        DirectIdle=10,
+        Jumping = 11
     }
 
     private static PlayerStates s_instance = null;
